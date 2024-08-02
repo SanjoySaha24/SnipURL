@@ -6,36 +6,51 @@ import Dashboard from './pages/dashboard'
 import Auth from './pages/auth'
 import Link from './pages/link'
 import RedirectLink from './pages/redirect-link'
+import UrlProvider from './context'
+import RequireAuth from './components/require-auth'
 
 const router = createBrowserRouter([
   {
-    element:<AppLayout />,
-    children:[
+    element: <AppLayout />,
+    children: [
       {
         path: "/",
-        element:<LandingPage />
-      },
-      {
-        path: "/dashboard",
-        element:<Dashboard />
+        element: <LandingPage />,
       },
       {
         path: "/auth",
-        element:<Auth />
+        element: <Auth />,
+      },
+      {
+        path: "/dashboard",
+        element: (
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        ),
       },
       {
         path: "/link/:id",
-        element:<Link />
+        element: (
+          <RequireAuth>
+            <Link />
+          </RequireAuth>
+        ),
       },
       {
         path: "/:id",
-        element:<RedirectLink />
+        element: <RedirectLink />,
       },
-    ]
-  }
-])
+    ],
+  },
+]);
+
 function App() {
-  return <RouterProvider router={router}/>;
+  return (
+    <UrlProvider>
+      <RouterProvider router={router} />
+    </UrlProvider>
+  );
 }
 
-export default App
+export default App;
