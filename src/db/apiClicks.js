@@ -4,7 +4,7 @@ export async function getClicksForUrls(urlIds) {
     const {data, error} = await supabase
       .from("clicks")
       .select("*")
-      .eq("user_id", urlIds);
+      .eq("url_id", urlIds);
   
     if (error) {
       console.error(error.message);
