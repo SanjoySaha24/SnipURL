@@ -104,12 +104,12 @@ const LinkPage = () => {
             <Button
               variant="ghost"
               onClick={() =>
-                fnDelete()}
-              //   .then(() => {
-              //     navigate("/dashboard");
-              //   })
-              // }
-              // disable={loadingDelete}
+                fnDelete()
+                .then(() => {
+                  navigate("/dashboard");
+                })
+              }
+              disable={loadingDelete}
             >
               {loadingDelete ? (
                 <BeatLoader size={5} color="white" />
